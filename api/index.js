@@ -13,11 +13,26 @@ mongoose.connect(process.env.MONGO)
         console.log(error);
     })
 const app = express();
+
+// to accept JSON from pos requests. 
 app.use(express.json());
 
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
 });
 
+//routes
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
+
+
+// middleware
+app.use((err, req, res, next) => {
+    const statusCode = err.statusCode || 500;
+    const message = err.message || 'Internal Server Error';
+    return res.status(statusCode).json({
+        success: false,
+        statusCode,
+        message,
+    });
+});
