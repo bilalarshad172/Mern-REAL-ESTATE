@@ -28,11 +28,10 @@ const SignUp = () => {
       if (data.success === false) {
         setError(data.message);
           setLoading(false);
-          setError(null);
-          navigate('/sign-in');
-        return;
       }
       setLoading(false);
+       setError(null);
+       navigate('/sign-in');
     } catch (error) {
       setLoading(false);
       setError(error.message);
