@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch,useSelector } from 'react-redux';
-import { signInFailure, signInStart, signInSuccess } from "../redux/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInFailure,
+  signInStart,
+  signInSuccess,
+} from "../redux/user/userSlice";
+import OAuth from "../components/OAuth";
 const Signin = () => {
   const [formData, setFormData] = useState({});
-  const { loading, error } = useSelector((state) => state.user);
+  const { loading, error } = useSelector((state) => state.users);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleChange = (e) => {
@@ -31,7 +36,7 @@ const Signin = () => {
         return;
       }
       dispatch(signInSuccess(data));
-       navigate('/');
+      navigate("/");
     } catch (error) {
       dispatch(signInFailure(data.message));
     }
@@ -62,14 +67,15 @@ const Signin = () => {
           >
             {loading ? "Loading..." : "Sign in"}
           </button>
+          <OAuth />
         </form>
         <div className="flex gap-2 mt-3">
           <p>Dont have an account?</p>
           <Link to={"/sign-up"}>
             <span className="text-blue-700">Sign up</span>
           </Link>
-              </div>
-              {error && <p className="text-red-500">{error}</p>}
+        </div>
+        {error && <p className="text-red-500">{error}</p>}
       </div>
     </div>
   );
