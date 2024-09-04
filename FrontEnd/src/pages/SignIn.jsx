@@ -9,7 +9,7 @@ import {
 import OAuth from "../components/OAuth";
 const Signin = () => {
   const [formData, setFormData] = useState({});
-  const { loading, error } = useSelector((state) => state.users);
+  const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleChange = (e) => {
