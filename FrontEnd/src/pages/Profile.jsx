@@ -19,6 +19,7 @@ import {
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { app } from "../../firebase";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -179,6 +180,10 @@ const Profile = () => {
         <button className="p-3 bg-slate-700 text-white uppercase rounded-lg hover:opacity-95 disabled:opacity-80">
           {loading ? "Loading..." : "Update"}
         </button>
+        <Link className="bg-green-700 text-white text-center uppercase p-3 rounded-lg hover:opacity-95" to={'/create-listing'}>
+        Create Listing
+        </Link>
+
       </form>
       <div className="flex justify-between mt-5">
         <span className="text-red-700 cursor-pointer" onClick={handleDeleteUSer}>Delete Account</span>
